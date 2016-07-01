@@ -101,27 +101,27 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Lykke.BlockchainExplorer.BlockchainDataProvider\Lykke.BlockchainExplorer.BlockchainDataProvider.csproj">
+    <ProjectReference Include="..\Lykke.BlockchainExplorer.BlockchainDataProvider\Lykke.BlockchainExplorer.BlockchainDataProvider.csproj">
       <Project>{47caba51-e770-44e9-ab1c-faf5a3aeced3}</Project>
       <Name>Lykke.BlockchainExplorer.BlockchainDataProvider</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\Lykke.BlockchainExplorer.Core\Lykke.BlockchainExplorer.Core.csproj">
+    <ProjectReference Include="..\Lykke.BlockchainExplorer.Core\Lykke.BlockchainExplorer.Core.csproj">
       <Project>{3deddf9c-1943-41a6-aa24-74f026457beb}</Project>
       <Name>Lykke.BlockchainExplorer.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\Lykke.BlockchainExplorer.Repository\Lykke.BlockchainExplorer.Repository.csproj">
+    <ProjectReference Include="..\Lykke.BlockchainExplorer.Repository\Lykke.BlockchainExplorer.Repository.csproj">
       <Project>{09d4bcc9-e2ea-40f7-98d3-ae57c72e649e}</Project>
       <Name>Lykke.BlockchainExplorer.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\Lykke.BlockchainExplorer.ServiceLocator\Lykke.BlockchainExplorer.ServiceLocator.csproj">
+    <ProjectReference Include="..\Lykke.BlockchainExplorer.ServiceLocator\Lykke.BlockchainExplorer.ServiceLocator.csproj">
       <Project>{1b824fa6-d25f-4c00-9094-ed8bd0ffb894}</Project>
       <Name>Lykke.BlockchainExplorer.ServiceLocator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\Lykke.BlockchainExplorer.Settings\Lykke.BlockchainExplorer.Settings.csproj">
+    <ProjectReference Include="..\Lykke.BlockchainExplorer.Settings\Lykke.BlockchainExplorer.Settings.csproj">
       <Project>{c1629c1a-877b-4ea3-b392-92c6ab4e6ffd}</Project>
       <Name>Lykke.BlockchainExplorer.Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\NBitcoin.Indexer\NBitcoin.Indexer.csproj">
+    <ProjectReference Include="..\NBitcoin.Indexer\NBitcoin.Indexer.csproj">
       <Project>{210de089-5d25-4967-a7a4-95b98a823da2}</Project>
       <Name>NBitcoin.Indexer</Name>
     </ProjectReference>

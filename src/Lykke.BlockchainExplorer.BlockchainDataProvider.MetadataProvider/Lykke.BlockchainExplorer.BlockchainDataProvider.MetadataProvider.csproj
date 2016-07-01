@@ -50,7 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Lykke.BlockchainExplorer.Core\Lykke.BlockchainExplorer.Core.csproj">
+    <ProjectReference Include="..\Lykke.BlockchainExplorer.Core\Lykke.BlockchainExplorer.Core.csproj">
       <Project>{3deddf9c-1943-41a6-aa24-74f026457beb}</Project>
       <Name>Lykke.BlockchainExplorer.Core</Name>
     </ProjectReference>

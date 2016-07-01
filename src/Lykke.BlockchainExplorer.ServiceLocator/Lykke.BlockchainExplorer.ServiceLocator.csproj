@@ -52,7 +52,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider\Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider.csproj">
+    <ProjectReference Include="..\Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider\Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider.csproj">
       <Project>{fcdb3fac-36d5-41c0-9a35-a978444c21be}</Project>
       <Name>Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider</Name>
     </ProjectReference>

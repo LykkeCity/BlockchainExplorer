@@ -48,15 +48,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.BlockchainExplorer.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.BlockchainExplorer.Settings", "src\Lykke.BlockchainExplorer.Settings\Lykke.BlockchainExplorer.Settings.csproj", "{C1629C1A-877B-4EA3-B392-92C6AB4E6FFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.BlockchainExplorer.UI", "Lykke.BlockchainExplorer.UI\Lykke.BlockchainExplorer.UI.csproj", "{5148F8CD-71E7-456E-8BE0-C86251BEB66B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.BlockchainExplorer.UI", "src\Lykke.BlockchainExplorer.UI\Lykke.BlockchainExplorer.UI.csproj", "{5148F8CD-71E7-456E-8BE0-C86251BEB66B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.BlockchainExplorer.BitcoinBridge", "Lykke.BlockchainExplorer.BitcoinBridge\Lykke.BlockchainExplorer.BitcoinBridge.csproj", "{091DFB79-EC6C-411E-97F0-888C970104FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.BlockchainExplorer.BitcoinBridge", "src\Lykke.BlockchainExplorer.BitcoinBridge\Lykke.BlockchainExplorer.BitcoinBridge.csproj", "{091DFB79-EC6C-411E-97F0-888C970104FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider", "Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider\Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider.csproj", "{FCDB3FAC-36D5-41C0-9A35-A978444C21BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider", "src\Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider\Lykke.BlockchainExplorer.BlockchainDataProvider.MetadataProvider.csproj", "{FCDB3FAC-36D5-41C0-9A35-A978444C21BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBitcoin.Indexer", "src\NBitcoin.Indexer\NBitcoin.Indexer.csproj", "{210DE089-5D25-4967-A7A4-95B98A823DA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lykke.BlockchainExplorer.BlockchainDataProvider.NBitcoinIndexer", "Lykke.BlockchainExplorer.BlockchainDataProvider.NBitcoinIndexer\Lykke.BlockchainExplorer.BlockchainDataProvider.NBitcoinIndexer.csproj", "{AFDB7418-2F60-4619-B0D4-E08163DA5FC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src\Lykke.BlockchainExplorer.BlockchainDataProvider.NBitcoinIndexer", "Lykke.BlockchainExplorer.BlockchainDataProvider.NBitcoinIndexer\Lykke.BlockchainExplorer.BlockchainDataProvider.NBitcoinIndexer.csproj", "{AFDB7418-2F60-4619-B0D4-E08163DA5FC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
