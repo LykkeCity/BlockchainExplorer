@@ -41,6 +41,10 @@ body {margin-top: 0px;background: #F7F8F9; font-family: 'ProximaNova-Regular'; c
     width: 100%;
 }
 
+.logo img {
+    display: inline
+}
+
 @media (min-width: 768px) {
     .logo img {
         width: auto;
@@ -326,12 +330,13 @@ table td.no-wrap, table th.no-wrap {
 }
 
 footer{
-            background: #fff;
-            bottom: 0;
-            width: 100%;
-            border-top: 1px solid #eeeff1;
-            color: #BCC1C8;
-            padding: 20px;
+    background: #fff;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #eeeff1;
+    color: #BCC1C8;
+    padding: 20px;
+    height: 96px;
 }
 .f-social{}
 .f-social a{
@@ -339,11 +344,36 @@ footer{
     width: 100px;
     margin-right: 15px;
 }
-.f-social img{
-    width: 100%;
+
+.social-icon{
+    height: 18px;
+    opacity: 0.35;
 }
+
+.social-name {
+    color: #3F4D60;
+    opacity: 0.6;
+    margin-left: 10px;
+    font-size: 16px;
+
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.f-social a:hover .social-icon, .f-social a:active .social-icon,.f-social a:hover .social-name, .f-social a:active .social-name{
+    opacity: 1
+}
+
+.f-social a:hover {
+    text-decoration: none;
+}
+
+
 .copyr{
     float: left;
+    color: #3F4D60;
+    opacity: 0.6;
+    font-size: 18px;
 }
 
 body .search-top{
