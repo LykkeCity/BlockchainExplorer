@@ -426,7 +426,15 @@ body .btn-s-top {
     color: #3f4d60;
     margin-bottom: 20px;
 }
-a{color: #5FC2FA}
+a {
+  width: 68px;
+  height: 30px;
+  font-family: ProximaNova;
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1.67;
+  color: #0da7fc;
+}
 
 .tr-date{
     color: #C7C7C7;
