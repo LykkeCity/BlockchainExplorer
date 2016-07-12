@@ -33,9 +33,20 @@ body {margin-top: 0px;background: #F7F8F9; font-family: 'ProximaNova-Regular'; c
     margin-right: 20px;
     width: 85px;
 }
+
+
 .logo a{
 }
-.logo img{width: 100%;}
+.logo img {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .logo img {
+        width: auto;
+        height: 50px;
+    }
+}
 .home-first {
     margin-top: -20px;
     padding: 50px 0 100px;
@@ -89,6 +100,13 @@ body {margin-top: 0px;background: #F7F8F9; font-family: 'ProximaNova-Regular'; c
     min-width: 200px;
     margin: 0 auto;
 }
+
+@media (min-width: 768px) {
+   .navbar-nav {
+    height: 80px;
+   } 
+}
+
 .search {
     width: 100%;
 }
@@ -230,10 +248,10 @@ table td.no-wrap, table th.no-wrap {
 .navbar-inverse {
     background-color: #FFFFFF;
     border: none;
-    border-bottom: 1px solid #eeeff1;
+    border-bottom: 1px solid #DFE1E5;
 }
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
-    color: #CA62FF;
+    color:  #AB00FF;
     background: none;
     font-family: 'ProximaNova-Semibold';
     text-transform: uppercase;
