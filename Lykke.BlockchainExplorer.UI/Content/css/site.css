@@ -316,7 +316,8 @@ table td.no-wrap, table th.no-wrap {
 .navbar-nav{ float: none !important;}
 
 .btn-search {
-    background: url('../images/btn.png');
+    border-radius: 100px!important;
+    background-image: linear-gradient(to right, #ff9100, #ff0029 51%, #ab00ff);
     width: 125px;
     background-size: 100%;
     height: 50px;
@@ -327,8 +328,7 @@ table td.no-wrap, table th.no-wrap {
 }
 .btn-search:hover{
     color: #fff;
-    background: url('../images/btn-hover.png');
-    background-size: 100%;
+    background-image: linear-gradient(to left, #ff9100, #ff0029 51%, #ab00ff)
 }
 
 footer{
@@ -427,8 +427,6 @@ body .btn-s-top {
     margin-bottom: 20px;
 }
 a {
-  width: 68px;
-  height: 30px;
   font-family: ProximaNova;
   font-size: 18px;
   font-weight: normal;
