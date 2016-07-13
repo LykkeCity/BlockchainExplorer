@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using Lykke.BlockchainExplorer.Core.Domain;
 using Lykke.BlockchainExplorer.BlockchainDataProvider.BitcoinNinja.Client;
 using Lykke.BlockchainExplorer.Settings;
+using NBitcoin.OpenAsset;
 
 namespace Lykke.BlockchainExplorer.BlockchainDataProvider.BitcoinNinja
 {
     public class BlockAdapter : IBlockProvider
     {
         private BitcoinNinjaClient _client;
+        private readonly ITransactionProvider _transactionProvider;
 
-        public BlockAdapter()
+        public BlockAdapter(ITransactionProvider transactionProvider)
         {
+            _transactionProvider = transactionProvider;
             var settings = new BitcoinNinjaSettings()
             {
                 Network = AppSettings.Network,
@@ -29,12 +32,14 @@ namespace Lykke.BlockchainExplorer.BlockchainDataProvider.BitcoinNinja
         {
             var b = await _client.GetInformationBlockAsync(id);
 
-            var transactions = b.Transactions.Select(x => new Transaction()
+            var transactionList = new List<Core.Domain.Transaction>();
+            var transactionIds = b.Transactions.Select(p => p.TxId).ToList();
+
+            foreach (var transactionId in transactionIds)
             {
-                TransactionId = x.TxId,
-                IsColor = x.IsColor
-            }).ToList();
-             
+                transactionList.Add(await _transactionProvider.GetTransaction(transactionId));
+            }
+
             var block = new Block()
             {
                 Hash = b.Hash,
@@ -46,7 +51,7 @@ namespace Lykke.BlockchainExplorer.BlockchainDataProvider.BitcoinNinja
                 Nonce = b.Nonce,
                 TotalTransactions = b.TotalTransactions, 
                 PreviousBlock = b.PreviousBlock,
-                Transactions = transactions
+                Transactions = transactionList
             };
              
             return block;

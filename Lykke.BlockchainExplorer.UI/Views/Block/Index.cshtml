@@ -1,4 +1,5 @@
 ﻿@using System;
+@using Lykke.BlockchainExplorer.UI.Models
 @model Lykke.BlockchainExplorer.UI.Models.BlockModel
 
 @{
@@ -81,14 +82,7 @@
                     <li class="list-group-item clearfix intput-output-group-list-item">
 
                         <div class="intput-output-group show-details">
-                            <div class="icon dspl-icon">
-                                <span class="currency-icon thumbnail">
-                                    <span class="bg-warning">
-                                        <i class="fa fa-btc"></i>
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="show-details-load" data-tx="@Model.Block.Transactions[i].TransactionId"><a href="">show details</a></div>
+                            @Html.Partial("~/Views/Transaction/PartialTransactionDetails.cshtml", new TransactionModel {Transaction = Model.Block.Transactions[i]})
                         </div>
 
                     </li>

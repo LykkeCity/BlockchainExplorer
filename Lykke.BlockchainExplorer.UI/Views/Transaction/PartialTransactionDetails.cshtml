@@ -1,4 +1,5 @@
-﻿@using Lykke.BlockchainExplorer.Core.Utils;
+﻿@using Lykke.BlockchainExplorer.Core.Domain
+@using Lykke.BlockchainExplorer.Core.Utils;
 @model Lykke.BlockchainExplorer.UI.Models.TransactionModel
 @{
     Layout = null;
@@ -30,7 +31,7 @@
                 else
                 {
 
-                    foreach (var input in Model.Transaction.TransactionIn.Where(input => input.AssetId == null && input.Value != 0))
+                    foreach (var input in (Model.Transaction.TransactionIn??Enumerable.Empty<In>()).Where(input => input.AssetId == null && input.Value != 0))
                     {
                         <div class="address-item ">
                             <div class="amount">
@@ -59,7 +60,7 @@
                         <img src="/Content/images/arrow.png" />
                     </div>
 
-                    @foreach (var output in Model.Transaction.TransactionsOut.Where(output => output.AssetId == null && output.Value != 0))
+                    @foreach (var output in (Model.Transaction.TransactionsOut??Enumerable.Empty<Out>()).Where(output => output.AssetId == null && output.Value != 0))
                     {
                         <div class="address-item ">
                             <div class="amount">

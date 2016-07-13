@@ -65,7 +65,7 @@ namespace Lykke.BlockchainExplorer.BlockchainDataProvider.BitcoinNinja
 
                 var asset = new Core.Domain.Asset();
                 asset.Id = k;
-                asset.MetadataUrl = t.TransactionUrl.ToString(); 
+                asset.MetadataUrl = t.TransactionUrl?.ToString(); 
 
                 asset.Input = assetRecord.AssetDataInput.Select(x => new In()
                 {
