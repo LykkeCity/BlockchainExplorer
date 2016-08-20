@@ -9,16 +9,16 @@ namespace Lykke.BlockchainExplorer.UI
 {
     public static class Product
     {
-        public static string Version
-        {
-            get
-            {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fileVersionInfo.ProductVersion;
+        private static readonly Lazy<string> _version = new Lazy<string>(GetVersion);
+        public static string Version => _version.Value;
 
-                return version;
-            }
+        private static string GetVersion()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string version = fileVersionInfo.ProductVersion;
+
+            return version;
         }
     }
 }
