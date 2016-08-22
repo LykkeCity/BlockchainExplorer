@@ -5,15 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lykke.BlockchainExplorer.Core.Domain;
+using Lykke.BlockchainExplorer.Core.Log;
+using Lykke.BlockchainExplorer.Core.Utils;
 
 namespace Lykke.BlockchainExplorer.Repository.SqlServer
 {
     public class AssetRepository : IAssetRepository, IDisposable
     {
         private Orm.Entities _context;
+        private readonly ILog _log;
 
-        public AssetRepository()
+        public AssetRepository(ILog log)
         {
+            _log = log;
             _context = new Orm.Entities();
         }
 
@@ -74,17 +78,22 @@ namespace Lykke.BlockchainExplorer.Repository.SqlServer
 
         public async Task Save(Asset entity)
         {
-            await Task.Run(() =>
-            {
-                SaveAsset(entity);
-            });
+            await SaveAsset(entity);
         }
 
-        private void SaveAsset(Asset entity)
+        private async Task SaveAsset(Asset entity)
         {
-            _context.InsertAsset(entity.Id, entity.Name, entity.NameShort, entity.Description, entity.DescriptionMime,
-                                 entity.Type, entity.ContractUrl, entity.MetadataUrl, entity.FinalMetadataUrl, entity.Issuer,
-                                 entity.VerifiedIssuer, entity.Divisibility, entity.IconUrl, entity.ImageUrl, entity.Version);
+            try
+            {
+                _context.InsertAsset(entity.Id, entity.Name, entity.NameShort, entity.Description, entity.DescriptionMime,
+                                                 entity.Type, entity.ContractUrl, entity.MetadataUrl, entity.FinalMetadataUrl, entity.Issuer,
+                                                 entity.VerifiedIssuer, entity.Divisibility, entity.IconUrl, entity.ImageUrl, entity.Version);
+            }
+            catch (Exception e)
+            {
+                await _log.WriteFatalError("AssetRepository", "SaveAsset", entity.ToJson(), e);
+            }
+            
         }
 
         public async Task<IList<Asset>> GetAssets()

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lykke.BlockchainExplorer.Core.Domain;
+using Lykke.BlockchainExplorer.Core.Log;
+using Lykke.BlockchainExplorer.Core.Utils;
 using Newtonsoft.Json;
 
 namespace Lykke.BlockchainExplorer.Repository.SqlServer
@@ -12,9 +14,11 @@ namespace Lykke.BlockchainExplorer.Repository.SqlServer
     public class BlockRepository : IBlockRepository, IDisposable
     {
         private Orm.Entities _context;
+        private readonly ILog _log;
 
-        public BlockRepository()
+        public BlockRepository(ILog log)
         {
+            _log = log;
             _context = new Orm.Entities();
         }
 
@@ -60,26 +64,28 @@ namespace Lykke.BlockchainExplorer.Repository.SqlServer
 
         public async Task Save(Block entity)
         {
-            await Task.Run(() =>
-            {
-                saveEntity(entity);
-            });
+            await saveEntity(entity);
         }
 
         public async Task SaveAsImport(Block entity)
         {
-            await Task.Run(() =>
-            {
-                saveEntity(entity, isImported: true);
-            });
+            await saveEntity(entity, isImported: true);
         }
 
-        private void saveEntity(Block entity, bool isImported = false)
+        private  async Task saveEntity(Block entity, bool isImported = false)
         {
-            var serializedEntity = JsonConvert.SerializeObject(entity);
+            try
+            {
+                var serializedEntity = JsonConvert.SerializeObject(entity);
 
-            _context.InsertBlock(entity.Hash, entity.Height, entity.Time, entity.Confirmations, entity.Difficulty, 
-                   entity.MerkleRoot, entity.Nonce, entity.TotalTransactions, isImported, entity.PreviousBlock, serializedEntity);
+                _context.InsertBlock(entity.Hash, entity.Height, entity.Time, entity.Confirmations, entity.Difficulty,
+                       entity.MerkleRoot, entity.Nonce, entity.TotalTransactions, isImported, entity.PreviousBlock, serializedEntity);
+            }
+            catch (Exception e)
+            {
+                await _log.WriteError("BlockRepository", "saveEntity", entity.ToJson(), e);
+            }
+
         }
 
         public void Dispose()

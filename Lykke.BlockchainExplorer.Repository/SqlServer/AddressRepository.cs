@@ -5,15 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lykke.BlockchainExplorer.Core.Domain;
+using Lykke.BlockchainExplorer.Core.Log;
+using Lykke.BlockchainExplorer.Core.Utils;
 
 namespace Lykke.BlockchainExplorer.Repository.SqlServer
 {
     public class AddressRepository : IAddressRepository, IDisposable
     {
         private Orm.Entities _context;
+        private readonly ILog _log;
 
-        public AddressRepository()
+        public AddressRepository(ILog log)
         {
+            _log = log;
             _context = new Orm.Entities();
         }
 
@@ -43,28 +47,37 @@ namespace Lykke.BlockchainExplorer.Repository.SqlServer
 
         public async Task Save(Address entity)
         {
-            await Task.Run(() =>
-            {
-                SaveAddress(entity);
-            });
+            await SaveAddress(entity);
         }
 
-        private void SaveAddress(Address entity)
+        private async Task SaveAddress(Address entity)
         {
-            _context.InsertAddress(entity.Hash, entity.ColoredAddress, entity.UncoloredAddress, entity.Balance);
+            try
+            {
+                _context.InsertAddress(entity.Hash, entity.ColoredAddress, entity.UncoloredAddress, entity.Balance);
+            }
+            catch (Exception e)
+            {
+                await _log.WriteFatalError("AddressRepository", "SaveAddress", entity.ToJson(), e);
+            }
         }
 
         public async Task UpdateAddress(Address address)
         {
-            await Task.Run(() =>
-            { 
-                UpdateAddressData(address);
-            });
+            await UpdateAddressData(address);
         } 
 
-        private void UpdateAddressData(Address address)
+        private async Task UpdateAddressData(Address address)
         {
-            _context.UpdateAddress(address.Hash, address.ColoredAddress, address.UncoloredAddress);
+            try
+            {
+                _context.UpdateAddress(address.Hash, address.ColoredAddress, address.UncoloredAddress);
+            }
+            catch (Exception e)
+            {
+
+                await _log.WriteFatalError("AddressRepository", "UpdateAddressData", address.ToJson(), e);
+            }
         }
 
         public void Dispose()

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lykke.BlockchainExplorer.Core.Domain;
+using Lykke.BlockchainExplorer.Core.Log;
+using Lykke.BlockchainExplorer.Core.Utils;
 using Newtonsoft.Json;
 
 namespace Lykke.BlockchainExplorer.Repository.SqlServer
@@ -12,9 +14,11 @@ namespace Lykke.BlockchainExplorer.Repository.SqlServer
     public class TransactionRepository : ITransactionRepository, IDisposable
     {
         private Orm.Entities _context;
+        private readonly ILog _log;
 
-        public TransactionRepository()
+        public TransactionRepository(ILog log)
         {
+            _log = log;
             _context = new Orm.Entities();
         }
 
@@ -71,38 +75,41 @@ namespace Lykke.BlockchainExplorer.Repository.SqlServer
 
         public async Task Save(Transaction entity)
         {
-            await Task.Run(() =>
-            {
-                SaveTransaction(entity);
-            });
+            await SaveTransaction(entity);
         }
 
         public async Task SaveAsImport(Transaction entity)
         {
-            await Task.Run(() =>
-            {
-                SaveTransaction(entity, isImport: true);
-            });
+            await SaveTransaction(entity, isImport: true);
         }
 
-        private void SaveTransaction(Transaction entity, bool isImport = false)
+        private async Task SaveTransaction(Transaction entity, bool isImport = false)
         {
-            var serializedEntity = JsonConvert.SerializeObject(entity);
-
-            _context.InsertTransaction(entity.TransactionId, entity.Time, entity.Confirmations, entity.IsColor,
-                        entity.IsCoinBase, entity.Hex, entity.Fees, entity.Blockhash, isImport, serializedEntity);
-
-            foreach (var transactionIn in entity.TransactionIn)
+            try
             {
-                _context.InsertTransactionItem(entity.TransactionId, (int)TransactionItemType.In, transactionIn.Address,
-                        transactionIn.Index, transactionIn.Value, transactionIn.AssetId, transactionIn.Quantity);
+                var serializedEntity = JsonConvert.SerializeObject(entity);
+
+                _context.InsertTransaction(entity.TransactionId, entity.Time, entity.Confirmations, entity.IsColor,
+                            entity.IsCoinBase, entity.Hex, entity.Fees, entity.Blockhash, isImport, serializedEntity);
+
+                foreach (var transactionIn in entity.TransactionIn)
+                {
+                    _context.InsertTransactionItem(entity.TransactionId, (int)TransactionItemType.In, transactionIn.Address,
+                            transactionIn.Index, transactionIn.Value, transactionIn.AssetId, transactionIn.Quantity);
+                }
+
+                foreach (var transactionOut in entity.TransactionsOut)
+                {
+                    _context.InsertTransactionItem(entity.TransactionId, (int)TransactionItemType.Out, transactionOut.Address,
+                            transactionOut.Index, transactionOut.Value, transactionOut.AssetId, transactionOut.Quantity);
+                }
             }
-            
-            foreach (var transactionOut in entity.TransactionsOut)
+            catch (Exception e)
             {
-                _context.InsertTransactionItem(entity.TransactionId, (int)TransactionItemType.Out, transactionOut.Address,
-                        transactionOut.Index, transactionOut.Value, transactionOut.AssetId, transactionOut.Quantity);
+                await _log.WriteFatalError("TransactionRepository", "SaveTransaction", entity.ToJson(), e);
+                throw;
             }
+
         }
 
         public void Dispose()
