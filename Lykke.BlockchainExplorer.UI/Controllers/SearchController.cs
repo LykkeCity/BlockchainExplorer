@@ -21,26 +21,29 @@ namespace Lykke.BlockchainExplorer.UI.Controllers
         [Route("search")]
         public async Task<ActionResult> Index(string id)
         {
-            var res = await SearchService.SearchEntityById(id);
-
-            if(res == EntitySearchResult.Block) 
+            if (!string.IsNullOrEmpty(id))
             {
-                return RedirectToAction("Index", "Block", new { id = id });
-            }
+                var res = await SearchService.SearchEntityById(id);
 
-            else if(res == EntitySearchResult.Transaction)
-            {
-                return RedirectToAction("Index", "Transaction", new { id = id });
-            }
+                if (res == EntitySearchResult.Block)
+                {
+                    return RedirectToAction("Index", "Block", new { id = id });
+                }
 
-            else if(res == EntitySearchResult.Address)
-            {
-                return RedirectToAction("Index", "Address", new { id = id });
-            }
+                else if (res == EntitySearchResult.Transaction)
+                {
+                    return RedirectToAction("Index", "Transaction", new { id = id });
+                }
 
-            else if(res == EntitySearchResult.Asset)
-            {
-                return RedirectToAction("Index", "Asset", new { id = id });
+                else if (res == EntitySearchResult.Address)
+                {
+                    return RedirectToAction("Index", "Address", new { id = id });
+                }
+
+                else if (res == EntitySearchResult.Asset)
+                {
+                    return RedirectToAction("Index", "Asset", new { id = id });
+                }
             }
 
             return View("_NotFound");
